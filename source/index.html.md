@@ -319,7 +319,7 @@ usernameBase64 | yes | The base64-encoded, lowercased email of the user. Also pa
 
 This API endpoint response simply with a 200 status code without body.
 
-## Creating a new user
+# Creating a new user
 
 > To create a new user, use this code:
 
@@ -337,11 +337,11 @@ curl -X POST "https://apigw-dev.trendeo.com/authentication/user" \
 }
 ```
 
-### HTTP Request
+## HTTP Request
 
 `POST https://apigw-dev.trendeo.com/authentication/user`
 
-### Query Parameters
+## Query Parameters
 
 Parameter | Required? | Description
 --------- | ------- | -----------
@@ -354,7 +354,7 @@ isNewsLetterAllowed | no | Boolean value (true or false) whether user allows to 
 gender | no | "MALE" or "FEMALE". Empty by default
 birthday | no | Valid date in the format yyyy-MM-dd. Empty by default.
 
-### Response
+## Response
 
 This API endpoint creates the user and logs her/him in immediately. Hence, the response contains the short-lived JWT as well as the long-lived refresh-token.
 

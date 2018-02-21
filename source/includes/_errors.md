@@ -3,7 +3,7 @@
 All API endpoints answer with the same error structure.
 Exception: In case an error happens on API-Gateway or Traefik-loadbalancer-level, the client should look only on the response code.
 
-Generally, an error message looks like the following example:
+Generally, an error message looks like in the example on the right.
 
 ```json
 {
