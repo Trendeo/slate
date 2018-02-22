@@ -201,6 +201,8 @@ The guest-user authentication does not use a refreshToken, because no database o
 
 `POST https://apigw-dev.trendeo.com/authentication/guestuser`
 
+The request needs to contain the previous JWT that was used for the particular user.
+
 ### Query Parameters
 
 Parameter | Required? | Description
@@ -223,6 +225,7 @@ jwt | A long-lived JWT for further API communication.
 ```shell
 curl -X POST "https://apigw-dev.trendeo.com/authentication/refresh" \
   -H "Content-type: application/json" \
+  -H "Authorization: Bearer abc..." \
   --data-raw "{\"username\":\"staging-test-user@trendeo.com\",\"refreshToken\":\"abc...\"}"
 ```
 
@@ -329,11 +332,12 @@ curl -X POST "https://apigw-dev.trendeo.com/authentication/user" \
   --data-raw "{\"username\":\"staging-test-user@trendeo.com\",\"market\":\"DE\",\"firstName\":\"API\",\"lastName\":\"LOVER\",\"password\":\"test-password\",\"isNewsletterAllowed\":true,\"gender\":\"MALE\",\"birthday\":\"2000-02-01\"}"
 ```
 
-> The above command returns just 200 status code right now - TODO: Should log in immediately...:
+> The above command returns a valid login, i.e. the new user is logged in immediately:
 
 ```json
 {
-
+  "jwt": "abc...",
+  "refreshToken" : "abc..."
 }
 ```
 
