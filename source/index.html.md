@@ -201,9 +201,9 @@ The guest-user authentication does not use a refreshToken, because no database o
 
 `POST https://apigw-dev.trendeo.com/authentication/guestuser`
 
-The request needs to contain the previous JWT that was used for the particular user.
-
 ### Query Parameters
+
+The request needs to contain the previous JWT that was used for the particular user.
 
 Parameter | Required? | Description
 --------- | ------- | -----------
@@ -354,13 +354,14 @@ market | yes | 2-symbol market identifier from which the user signs up.
 firstName | yes | First name
 lastName | yes | Last name
 password | yes | Plain password
-isNewsLetterAllowed | no | Boolean value (true or false) whether user allows to be signed up for our newsletters. Default is false.
+newsLetterAllowed | no | Boolean value (true or false) whether user allows to be signed up for our newsletters. Default is false.
 gender | no | "MALE" or "FEMALE". Empty by default
 birthday | no | Valid date in the format yyyy-MM-dd. Empty by default.
 
 ## Response
 
 This API endpoint creates the user and logs her/him in immediately. Hence, the response contains the short-lived JWT as well as the long-lived refresh-token.
+If newsletterAllowed is set to true, the user is subscribed to the mailchimp list of the given market (synchronously).
 
 Parameter | Description
 --------- | -------
