@@ -329,7 +329,7 @@ This API endpoint response simply with a 200 status code without body.
 ```shell
 curl -X POST "https://apigw-dev.trendeo.com/authentication/user" \
   -H "Content-type: application/json" \
-  --data-raw "{\"username\":\"staging-test-user@trendeo.com\",\"market\":\"DE\",\"firstName\":\"API\",\"lastName\":\"LOVER\",\"password\":\"test-password\",\"isNewsletterAllowed\":true,\"gender\":\"MALE\",\"birthday\":\"2000-02-01\"}"
+  --data-raw "{\"username\":\"staging-test-user@trendeo.com\",\"market\":\"DE\",\"firstName\":\"API\",\"lastName\":\"LOVER\",\"password\":\"test-password\",\"newsletterAllowed\":true,\"gender\":\"MALE\",\"birthday\":\"2000-02-01\"}"
 ```
 
 > The above command returns a valid login, i.e. the new user is logged in immediately:
@@ -354,7 +354,7 @@ market | yes | 2-symbol market identifier from which the user signs up.
 firstName | yes | First name
 lastName | yes | Last name
 password | yes | Plain password
-newsLetterAllowed | no | Boolean value (true or false) whether user allows to be signed up for our newsletters. Default is false.
+newsletterAllowed | no | Boolean value (true or false) whether user allows to be signed up for our newsletters. Default is false.
 gender | no | "MALE" or "FEMALE". Empty by default
 birthday | no | Valid date in the format yyyy-MM-dd. Empty by default.
 
