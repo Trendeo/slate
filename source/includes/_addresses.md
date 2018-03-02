@@ -79,6 +79,7 @@ primaryBilling | no | Is this the primary billing address of the user? True or f
 ### Response
 
 A successful request creates the address with a newly created address ID. In case any of the "primary" fields is set to "true", any other address having that field set to "true" is turned into "false", to make sure that there is just one primary address at any point in time.
+In case the address is created for a guest user, and this guest user does not have a database entry yet, this guest user will be created in database.
 
 Parameter | Description
 --------- | -------
@@ -362,7 +363,7 @@ None.
 
 ### Response
 
-The endpoint returns all addresses of the given user, as a dictionary with address IDs as keys. An empty object is returned in case there is no address yet.
+The endpoint returns all addresses of the given user, as a dictionary with address IDs as keys. An empty object is returned in case there is no address yet. In case the addresses of a guest user are requested, but the guest user does not exist yet in the database, just an empty list is returned.
 Each address has the already well-known structure:
 
 Parameter | Description

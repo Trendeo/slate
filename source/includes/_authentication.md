@@ -26,6 +26,22 @@ A user can sign up / log in via Facebook any time. If there has not been a user 
 A user can only log in or request a password reset in case there has been a regular sign-up with email/password before. In case the particular user has been created via Facebook sign-up and then attempts to log in with regular email/password, or attempts to reset the password, these requests are denied. The user first has to go through the regular sign-up process to use that particular account in that way.
 The API provides comprehensive feedback about reasons for denying requests; it's up to the API user what to present to the user and how.
 
+## Impersonation
+There is a certain complexity due to the fact that we allow the users to browse around without authentication, and even create addresses, orders, and so on. Of course, we would like the users to keep their guest user actions even when they log in or sign up. For example: When a user already created an address and added items to cart or wishlist, but only then signs up or logs in, we would like the "real user" to have the address and items in cart / wishlist too. Hence, an "impersonation" process needs to happen, during which those objects are transferred to the "real user".
+In current implementation, the following aspects are transferred:
+
+- Addresses
+- Cart
+- Wishlist entries
+- Previous orders
+
+Impersonation can happen during the following processes:
+
+- Login (email/password as well as facebook)
+- Sign-up (email/password as well as facebook)
+
+You will see below that those endpoints accept a parameter usually called "guestUserJWT", which needs to contain any previous JWT of the previous guest user.
+
 ## Getting a JWT with email/password
 
 > To get a jwt and refresh token with a email/password combo, use this code:
@@ -57,6 +73,7 @@ Parameter | Required? | Description
 --------- | ------- | -----------
 username | yes | Email of the user to log in.
 password | yes | Password in plain.
+guestUserJWT | no | Any JWT of the previous guest user. In case this parameter exists, impersonation is done from this guest user to the newly logged in user in case of success. The guest user JWT is not checked for correct issuer or expiration. Please check the "Impersonation" section above for more information on this topic.
 
 ### Response
 
@@ -139,6 +156,7 @@ Parameter | Required? | Description
 --------- | ------- | -----------
 market | yes | The 2-symbol market code from which the user is logging in / signing up.
 accessToken | yes | The Facebook access token obtained from the redirect. Will be used to access the user profile and get all required details to create a user in our database, if one does not exist yet.
+guestUserJWT | no | Any JWT of the previous guest user. In case this parameter exists, impersonation is done from this guest user to the newly logged in user in case of success. The guest user JWT is not checked for correct issuer or expiration. Please check the "Impersonation" section above for more information on this topic.
 
 #### Response
 
@@ -330,11 +348,13 @@ password | yes | Plain password
 newsletterAllowed | no | Boolean value (true or false) whether user allows to be signed up for our newsletters. Default is false.
 gender | no | "MALE" or "FEMALE". Empty by default
 birthday | no | Valid date in the format yyyy-MM-dd. Empty by default.
+guestUserJWT | no | Any JWT of the previous guest user. In case this parameter exists, impersonation is done from this guest user to the newly logged in user in case of success. The guest user JWT is not checked for correct issuer or expiration. Please check the "Impersonation" section above for more information on this topic.
 
 ## Response
 
 This API endpoint creates the user and logs her/him in immediately. Hence, the response contains the short-lived JWT as well as the long-lived refresh-token.
 If newsletterAllowed is set to true, the user is subscribed to the mailchimp list of the given market (synchronously).
+In case a guest user JWT is given, impersonation happens to the newly created user in case of success. Please refer to the "Impersonation" section above for more information about this topic.
 
 Parameter | Description
 --------- | -------
