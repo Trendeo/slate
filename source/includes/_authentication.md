@@ -292,7 +292,7 @@ The URL is structured as follows: $BASE_URL/$RANDOM_TOKEN/$BASE64_ENCODED_USERNA
 ```shell
 curl -X POST "https://apigw-dev.trendeo.com/authentication/change-password" \
   -H "Content-type: application/json" \
-  --data-raw "{\"password\":\"test-password\",\"resetPasswordToken\":\"Af33kd...\",\"usernameBase64\",\"AE302...\"}"
+  --data-raw "{\"password\":\"test-password\",\"resetPasswordToken\":\"Af33kd...\",\"usernameBase64\":\"AE302...\"}"
 ```
 
 This API endpoint response simply with a 200 status code without body.
@@ -308,6 +308,35 @@ Parameter | Required? | Description
 password | yes | The new password for the user, in plain.
 resetPasswordToken | yes | The random string in the reset-password-URL
 usernameBase64 | yes | The base64-encoded, lowercased email of the user. Also part of the reset-password-URL (see above)
+
+#### Response
+
+This API endpoint response simply with a 200 status code without body.
+
+### Reset the password while logged in
+
+> To change the password of a user from personal area, use this code:
+
+```shell
+curl -X POST "https://apigw-dev.trendeo.com/authentication/change-password-logged-in" \
+  -H "Authorization: Bearer abcd..." \
+  -H "Content-type: application/json" \
+  --data-raw "{\"currentPassword\":\"current\",\"newPassword\":\"new\"}"
+```
+
+This endpoint should be used for when the user would like to change her/his password while still being logged in. The client should then ask for current password as well as new password and provide it to the backend API for verification and update.
+This API endpoint response simply with a 200 status code without body.
+
+#### HTTP Request
+
+`POST https://apigw-dev.trendeo.com/authentication/change-password-logged-in`
+
+#### Query Parameters
+
+Parameter | Required? | Description
+--------- | ------- | -----------
+currentPassword | yes | The current user password
+newPassword | yes | The new password to be set for the logged-in user
 
 #### Response
 
