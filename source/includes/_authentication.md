@@ -390,15 +390,13 @@ Parameter | Description
 jwt | A new short-lived JWT for further API communication.
 refreshToken | A long-lived refresh-token to renew the jwt when it expired.
 
-# Updating the user profile
+# Get user profile
 
-> To update the details of a user, use this code:
+> To get the profile information of a user, use this code:
 
 ```shell
-curl -X PATCH "https://apigw-dev.trendeo.com/authentication/user" \
-  -H "Authorization: Bearer abcd..." \
-  -H "Content-type: application/json" \
-  --data-raw "{\"firstName\":\"API\",\"lastName\":\"LOVER\",\"gender\":\"MALE\",\"birthday\":\"2000-01-01\"}"
+curl -X GET "https://apigw-dev.trendeo.com/authentication/user" \
+  -H "Authorization: Bearer abcd..."
 ```
 
 > The above command returns the basic user data for the profile:
@@ -409,7 +407,48 @@ curl -X PATCH "https://apigw-dev.trendeo.com/authentication/user" \
     "lastName": "LOVER",
     "email": "api.lover@trendeo.com",
     "dateOfBirth": "2000-01-01",
-    "gender": "MALE"
+    "gender": "MALE",
+    "phone": "+7123123123"
+}
+```
+
+## HTTP Request
+
+`GET https://apigw-dev.trendeo.com/authentication/user`
+
+## Response
+
+This API endpoint updates the given field of the logged-in user according to the given JWT. It returns the basic user profile:
+
+Parameter | Description
+--------- | -------
+firstName | First name
+lastName | Last name
+gender | "MALE" or "FEMALE"
+birthday | Valid date in the format yyyy-MM-dd
+phone | Phone number
+
+# Updating the user profile
+
+> To update the details of a user, use this code:
+
+```shell
+curl -X PATCH "https://apigw-dev.trendeo.com/authentication/user" \
+  -H "Authorization: Bearer abcd..." \
+  -H "Content-type: application/json" \
+  --data-raw "{\"firstName\":\"API\",\"lastName\":\"LOVER\",\"gender\":\"MALE\",\"birthday\":\"2000-01-01\",\"phone\":\"+7123123123\"}"
+```
+
+> The above command returns the basic user data for the profile:
+
+```json
+{
+    "firstName": "API",
+    "lastName": "LOVER",
+    "email": "api.lover@trendeo.com",
+    "dateOfBirth": "2000-01-01",
+    "gender": "MALE",
+    "phone": "+7123123123"
 }
 ```
 
@@ -425,6 +464,7 @@ firstName | no | First name
 lastName | no | Last name
 gender | no | "MALE" or "FEMALE"
 birthday | no | Valid date in the format yyyy-MM-dd
+phone | no | phone number; any text is allowed, no validation
 
 This endpoint is access-restricted of course, so a valid JWT must be provided.
 Empty fields will not be updated, i.e. they will not be cleared in case a value is already set.
@@ -439,3 +479,4 @@ firstName | First name
 lastName | Last name
 gender | "MALE" or "FEMALE"
 birthday | Valid date in the format yyyy-MM-dd
+phone | Phone number
