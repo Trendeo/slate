@@ -406,7 +406,7 @@ curl -X GET "https://apigw-dev.trendeo.com/authentication/user" \
     "firstName": "API",
     "lastName": "LOVER",
     "email": "api.lover@trendeo.com",
-    "dateOfBirth": "2000-01-01",
+    "birthday": "2000-01-01",
     "gender": "MALE",
     "phone": "+7123123123"
 }
@@ -446,7 +446,7 @@ curl -X PATCH "https://apigw-dev.trendeo.com/authentication/user" \
     "firstName": "API",
     "lastName": "LOVER",
     "email": "api.lover@trendeo.com",
-    "dateOfBirth": "2000-01-01",
+    "birthday": "2000-01-01",
     "gender": "MALE",
     "phone": "+7123123123"
 }

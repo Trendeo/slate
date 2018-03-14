@@ -8,6 +8,7 @@ includes:
   - introduction
   - authentication
   - addresses
+  - reviews
   - errors
 
 search: true
