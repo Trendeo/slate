@@ -10,6 +10,7 @@ includes:
   - addresses
   - catalog
   - reviews
+  - priceactions
   - errors
 
 search: true
