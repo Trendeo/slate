@@ -23,8 +23,9 @@ A successful call will give you a warm welcome message, however an invalid / mis
 
 A few words on different authentication methods: There is a certain complexity in offering different authentication methods for the same user base. As example, a user might sign up via Facebook, however then attempting a password reset and logging in via the regular email/password login. Following logic is applied to manage this:
 A user can sign up / log in via Facebook any time. If there has not been a user so far, it will be created based on the particular Facebook profile. If a user from another sign-up source (i.e. email/password) already exists, this user is simply logged in.
-A user can only log in or request a password reset in case there has been a regular sign-up with email/password before. In case the particular user has been created via Facebook sign-up and then attempts to log in with regular email/password, or attempts to reset the password, these requests are denied. The user first has to go through the regular sign-up process to use that particular account in that way.
-The API provides comprehensive feedback about reasons for denying requests; it's up to the API user what to present to the user and how.
+A newly created facebook user will receive a random password.
+It might happen that we cannot read the email of the facebook user (e.g. because the user uses phone number login, has not confirmed his/her email, or has selected to his the email address). In that case, the API generates a random email address with domain "no_facebook_email.trendeo.com". The client should then ask the user for his/her real email address and update it (TODO: THAT ENDPOINT DOES NOT EXIST YET!).
+A facebook user might request a password reset, after which (s)he will also be able to log in via regular email/password login.
 
 ## Impersonation
 There is a certain complexity due to the fact that we allow the users to browse around without authentication, and even create addresses, orders, and so on. Of course, we would like the users to keep their guest user actions even when they log in or sign up. For example: When a user already created an address and added items to cart or wishlist, but only then signs up or logs in, we would like the "real user" to have the address and items in cart / wishlist too. Hence, an "impersonation" process needs to happen, during which those objects are transferred to the "real user".
@@ -57,7 +58,8 @@ curl -X POST "https://apigw-dev.trendeo.com/authentication/login" \
 ```json
 {
   "jwt": "abc...",
-  "refreshToken" : "abc..."
+  "refreshToken" : "abc...",
+  "username": "user@domain.com"
 }
 ```
 
@@ -83,6 +85,7 @@ Parameter | Description
 --------- | -------
 jwt | Your fresh and new JWT for future requests.
 refreshToken | Token for getting a new JWT once its expired.
+username | Username of logged-in user
 
 ## Getting a JWT via Facebook login
 
@@ -142,7 +145,8 @@ curl -X POST "https://apigw-dev.trendeo.com/authentication/social/facebook" \
 ```json
 {
   "jwt": "abc...",
-  "refreshToken" : "abc..."
+  "refreshToken" : "abc...",
+  "username": "user@trendeo.com"
 }
 ```
 
@@ -161,11 +165,13 @@ guestUserJWT | no | Any JWT of the previous guest user. In case this parameter e
 #### Response
 
 The API responds with the same structure you also see in the regular login (a jwt and a refresh token).
+Important: As described in the introduction chapter, we might not be able to retrieve the email address of the user. In that case, a random email address of domain "no_facebook_email.trendeo.com" is created. The user should then be asked for her/his real email address and then update the information with another backend call (TODO: NOT IMPLEMENTED YET). You can recognize this by analysing the "username" field of the response object.
 
 Parameter | Description
 --------- | -------
 jwt | Your fresh and new JWT for future requests.
 refreshToken | Token for getting a new JWT once its expired.
+username | Username of the logged-in user
 
 ## Getting a JWT for a guest user
 
@@ -225,7 +231,8 @@ curl -X POST "https://apigw-dev.trendeo.com/authentication/refresh" \
 ```json
 {
   "jwt": "abc...",
-  "refreshToken" : "abc..."
+  "refreshToken" : "abc...",
+  "username": "user@domain.com"
 }
 ```
 
@@ -251,6 +258,7 @@ Parameter | Description
 --------- | -------
 jwt | A new short-lived JWT for further API communication.
 refreshToken | A new, long-lived refresh-token to renew the jwt when it expired.
+username | Username of the logged-in user
 
 ## Password reset
 
@@ -357,7 +365,8 @@ curl -X POST "https://apigw-dev.trendeo.com/authentication/user" \
 ```json
 {
   "jwt": "abc...",
-  "refreshToken" : "abc..."
+  "refreshToken" : "abc...",
+  "username": "user@domain.com"
 }
 ```
 
@@ -389,6 +398,7 @@ Parameter | Description
 --------- | -------
 jwt | A new short-lived JWT for further API communication.
 refreshToken | A long-lived refresh-token to renew the jwt when it expired.
+username | Username of new user
 
 # Get user profile
 
