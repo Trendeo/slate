@@ -164,7 +164,7 @@ Allows to request catalog product lists by various filters.
 ```shell
 curl -X POST "https://apigw-dev.trendeo.com/catalog/search" \
   -H "Content-type: application/json" \
-  --data-raw "{ \"searchText\": \"dress\", \"sortField\": \"POPULARITY\", \"sortDirection\": \"DESC\", \"market\": \"UK\", \"filteredSizes\": [ \"S\", \"M\" ], \"filteredMerchants\": [ \"nazz-collection\", \"glamzam\", \"pretty-and-party\" ], \"filteredCategories\": [ \"Women|Clothing|Dresses\" ], \"filteredTags\": [ \"embroideredpieces\" ], \"filteredColors\": [ \"red\", \"rose\", \"black\" ], \"minPrice\": 30, \"maxPrice\": 55, \"page\": 0, \"pageSize\": 10, \"aggregationsIncluded\": true, \"publicOnly\": true }"
+  --data-raw "{ \"searchText\": \"dress\", \"sortField\": \"POPULARITY\", \"sortDirection\": \"DESC\", \"market\": \"UK\", \"filteredSizes\": [ \"S\", \"M\" ], \"filteredMerchants\": [ \"nazz-collection\", \"glamzam\", \"pretty-and-party\" ], \"filteredCategories\": [ \"Women|Clothing|Dresses\" ], \"filteredTags\": [ \"embroideredpieces\" ], \"filteredColors\": [ \"red\", \"rose\", \"black\" ], \"minPrice\": 30, \"maxPrice\": 55, \"minDiscount\": 10, \"maxDiscount\": 25, \"page\": 0, \"pageSize\": 10, \"aggregationsIncluded\": true, \"publicOnly\": true }"
 ```
 
 > The above command returns a dictionary like this:
@@ -232,6 +232,8 @@ searchText | no | Free-text search input
 page | no | Page you would like to receive. By default returns the first page (0).
 minPrice | no | Minimum price to filter. 0.01 by default
 maxPrice | no | Maximum price to filter. No maximum price by default
+minDiscount | no | The minimum discount in % that the returned products have
+maxDiscount | no | The maximum discount in % that the returned products have
 publicOnly | no | "true" or "false"; determines whether you will get only products with status "PUBLIC", or all. The API returns also non-PUBLIC products by default
 aggregationsIncluded | no | Do you want the aggregations for filters to be included or not (true or false). Not included by default
 sortField | no | Field to sort by. Can be one of "POPULARITY", "CREATED" or "PRICE". Default is "POPULARITY"
