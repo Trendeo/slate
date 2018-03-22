@@ -11,6 +11,7 @@ includes:
   - catalog
   - reviews
   - priceactions
+  - wishlist
   - errors
 
 search: true
