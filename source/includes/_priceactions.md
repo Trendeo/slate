@@ -10,6 +10,7 @@
     "merchantId": "diva-dames",
     "actionStart": "2018-01-15",
     "actionEnd": "2018-03-20",
+    "blackPricesOnly": true,
     "title": "Test",
     "discountPercentage": 20,
     "createdAt": "2018-03-18 08:38:22",
@@ -35,6 +36,7 @@
     "merchantId": "glamzam",
     "actionStart": "2018-01-15",
     "actionEnd": "2018-03-20",
+    "blackPricesOnly": true,
     "title": "A price action",
     "filteredCategories": {
 		    "categories": [
@@ -57,6 +59,7 @@ discountPercentage | yes | Numerical value for the percentage discount to apply.
 merchantId | yes | Merchant ID of the merchant owning the price action.
 actionStart | yes | Start date in format yyyy-mm-dd.
 actionEnd | yes | End date in format yyyy-mm-dd. Needs to be after start date
+blackPricesOnly | no | Whether the action should be only applied to non-discounted products, or to any. Default is false (i.e. applies to any product)
 title | no | Title of the price action; not more than 255 characters.
 filteredCategories | no | Object containing the field "categories", which just contains a string-array of all category IDs ("Women|Clothing|Dresses|...") to which the price action should be limited.
 
@@ -157,7 +160,7 @@ For a logged-in merchant, the parameter in the body is basically ignored, but sh
 curl -X POST "https://api-dev.trendeo.com/price-actions" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc..." \
-  --data-raw "{ \"discountPercentage\": 30, \"merchantId\": \"glamzam\", \"actionStart\": \"2018-01-15\", \"actionEnd\": \"2018-03-20\", \"filteredCategories\": { \"categories\": [ \"test\", \"test2\" ] } }"
+  --data-raw "{ \"discountPercentage\": 30, \"merchantId\": \"glamzam\", \"actionStart\": \"2018-01-15\", \"actionEnd\": \"2018-03-20\", \"blackPricesOnly\": true, \"filteredCategories\": { \"categories\": [ \"test\", \"test2\" ] } }"
 ```
 
 > The above command returns the created price action object, as defined above.
@@ -176,7 +179,7 @@ Updates the price action with the given ID.
 curl -X PATCH "https://api-dev.trendeo.com/price-actions/{id}" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc..." \
-  --data-raw "{ \"discountPercentage\": 30, \"merchantId\": \"glamzam\", \"actionStart\": \"2018-01-15\", \"actionEnd\": \"2018-03-20\", \"filteredCategories\": { \"categories\": [ \"test\", \"test2\" ] } }"
+  --data-raw "{ \"discountPercentage\": 30, \"merchantId\": \"glamzam\", \"actionStart\": \"2018-01-15\", \"actionEnd\": \"2018-03-20\", \"blackPricesOnly\": true, \"filteredCategories\": { \"categories\": [ \"test\", \"test2\" ] } }"
 ```
 
 > The above command returns the updated price action object, as defined above.
