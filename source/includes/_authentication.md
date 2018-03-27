@@ -165,13 +165,42 @@ guestUserJWT | no | Any JWT of the previous guest user. In case this parameter e
 #### Response
 
 The API responds with the same structure you also see in the regular login (a jwt and a refresh token).
-Important: As described in the introduction chapter, we might not be able to retrieve the email address of the user. In that case, a random email address of domain "no_facebook_email.trendeo.com" is created. The user should then be asked for her/his real email address and then update the information with another backend call (TODO: NOT IMPLEMENTED YET). You can recognize this by analysing the "username" field of the response object.
+Important: As described in the introduction chapter, we might not be able to retrieve the email address of the user. In that case, an auto-generated email address "{facebook-user-id}@no_facebook_email.trendeo.com" is created. The user should then be asked for her/his real email address and then update the information with another backend call (see change-email endpoint below). You can recognize this by analysing the "username" field of the response object.
 
 Parameter | Description
 --------- | -------
 jwt | Your fresh and new JWT for future requests.
 refreshToken | Token for getting a new JWT once its expired.
 username | Username of the logged-in user
+
+### Changing the email address
+
+> To change the email address of a facebook user for whom we did not get the email address, use this code:
+
+```shell
+curl -X POST "https://apigw-dev.trendeo.com/authentication/social/facebook/change-email" \
+  -H "Content-type: application/json" \
+  -H "Authorization: Bearer abc..." \
+  --data-raw "{\"username\":\"testuser@trendeo.com\"}"
+```
+
+> The above command returns just a 200 response without body:
+
+#### HTTP Request
+
+`POST https://apigw-dev.trendeo.com/authentication/social/facebook/change-email`
+
+#### Query Parameters
+
+Parameter | Required? | Description
+--------- | ------- | -----------
+username | yes | The new username / email you would like to store to the user.
+
+#### Response
+
+The API responds with a 200 response without body.
+You will get a 400 response in case the logged-in user actually does not have an auto-generated username from us.
+Important: This endpoint does not do "impersonation" as described in the initial sections, because this change should happen right after sign-up and there should not be too much activity of that user before.
 
 ## Getting a JWT for a guest user
 
