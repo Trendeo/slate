@@ -181,7 +181,7 @@ username | Username of the logged-in user
 curl -X POST "https://apigw-dev.trendeo.com/authentication/social/facebook/change-email" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc..." \
-  --data-raw "{\"username\":\"testuser@trendeo.com\"}"
+  --data-raw "{\"newEmail\":\"testuser@trendeo.com\"}"
 ```
 
 > The above command returns just a 200 response without body:
@@ -194,13 +194,13 @@ curl -X POST "https://apigw-dev.trendeo.com/authentication/social/facebook/chang
 
 Parameter | Required? | Description
 --------- | ------- | -----------
-username | yes | The new username / email you would like to store to the user.
+newEmail | yes | The new email you would like to store to the user.
 
 #### Response
 
 The API responds with a 200 response without body.
 You will get a 400 response in case the logged-in user actually does not have an auto-generated username from us.
-Important: This endpoint does not do "impersonation" as described in the initial sections, because this change should happen right after sign-up and there should not be too much activity of that user before.
+Important: This endpoint changes only the email address, not the username. So the user will have the same user again as soon as (s)he performs a re-login.
 
 ## Getting a JWT for a guest user
 
