@@ -323,7 +323,7 @@ Returns all merchant reviews that have been posted by the logged-in user.
 > To get all reviews of a merchant for the logged-in user, use this code:
 
 ```shell
-curl -X GET "https://apigw-dev.trendeo.com/user_restricted/reviews/merchants" \
+curl -X GET "https://apigw-dev.trendeo.com/user-restricted/reviews/merchants" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc..."
 ```
@@ -332,7 +332,7 @@ curl -X GET "https://apigw-dev.trendeo.com/user_restricted/reviews/merchants" \
 
 ### HTTP Request
 
-`GET https://apigw-dev.trendeo.com/user_restricted/reviews/merchants`
+`GET https://apigw-dev.trendeo.com/user-restricted/reviews/merchants`
 
 
 ## Get all reviews for a specific sub-order
@@ -342,7 +342,7 @@ Returns all merchant and product reviews that have been posted in context of a s
 > To get all reviews in context of a specific sub-order, use this code:
 
 ```shell
-curl -X GET "https://apigw-dev.trendeo.com/orders/{subOrderId}" \
+curl -X GET "https://apigw-dev.trendeo.com/reviews/orders/{subOrderId}" \
   -H "Content-type: application/json"
 ```
 
@@ -350,7 +350,7 @@ curl -X GET "https://apigw-dev.trendeo.com/orders/{subOrderId}" \
 
 ### HTTP Request
 
-`GET https://apigw-dev.trendeo.com/orders/{subOrderId}`
+`GET https://apigw-dev.trendeo.com/reviews/orders/{subOrderId}`
 
 
 ## Get all reviews done by logged-in user
@@ -360,7 +360,7 @@ Returns all merchant and product reviews that have been posted by a specific use
 > To get all reviews of a specific user, use the following code:
 
 ```shell
-curl -X GET "https://apigw-dev.trendeo.com/user_restricted/reviews/user" \
+curl -X GET "https://apigw-dev.trendeo.com/user-restricted/reviews/user" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc..."
 ```
@@ -369,7 +369,7 @@ curl -X GET "https://apigw-dev.trendeo.com/user_restricted/reviews/user" \
 
 ### HTTP Request
 
-`GET https://apigw-dev.trendeo.com/user_restricted/reviews/user`
+`GET https://apigw-dev.trendeo.com/user-restricted/reviews/user`
 
 
 ## Post a product review
@@ -379,7 +379,7 @@ Creates a product review by the logged-in user.
 > To create product review, use the following code:
 
 ```shell
-curl -X POST "https://apigw-dev.trendeo.com/user_restricted/reviews/products" \
+curl -X POST "https://apigw-dev.trendeo.com/user-restricted/reviews/products" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc..."
   --data-raw "{\"productId\":\"818278d3-c011-35a3-95a6-1f43378d9835\",\"productSku\":\"Rosella_Khaki_14\",\"text\":\"Cool product\",\"reviewerName\":\"Max\",\"rating\":5,\"subOrderId\":\"UK170804-314340-25659\",\"fit\":\"SMALL\"}"
@@ -390,7 +390,7 @@ This endpoint will return the resulting product review as defined above.
 
 ### HTTP Request
 
-`POST https://apigw-dev.trendeo.com/user_restricted/reviews/products`
+`POST https://apigw-dev.trendeo.com/user-restricted/reviews/products`
 
 
 ## Post a merchant review
@@ -400,7 +400,7 @@ Creates a merchant review by the logged-in user.
 > To create merchant review, use the following code:
 
 ```shell
-curl -X POST "https://apigw-dev.trendeo.com/user_restricted/reviews/merchants" \
+curl -X POST "https://apigw-dev.trendeo.com/user-restricted/reviews/merchants" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc..."
   --data-raw "{\"subOrderId\":\"UK170804-314340-25659\",\"text\":\"Cool merchant\",\"reviewerName\":\"Max\",\"rating\":5}"
@@ -411,4 +411,4 @@ This endpoint will return the resulting merchant review as defined above.
 
 ### HTTP Request
 
-`POST https://apigw-dev.trendeo.com/user_restricted/reviews/merchants`
+`POST https://apigw-dev.trendeo.com/user-restricted/reviews/merchants`

@@ -57,7 +57,7 @@ The path contains the market (2-symbol market code in lower-case) and can contai
 > To get the wishlist of a user, use this code:
 
 ```shell
-curl -X GET "https://api-dev.trendeo.com/wishlist/{market}?page=0&pageSize=48" \
+curl -X GET "https://api-dev.trendeo.com/user-restricted/wishlist/{market}?page=0&pageSize=48" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc..."
 ```
@@ -66,7 +66,7 @@ curl -X GET "https://api-dev.trendeo.com/wishlist/{market}?page=0&pageSize=48" \
 
 ### HTTP Request
 
-`GET https://api-dev.trendeo.com/wishlist/{market}`
+`GET https://api-dev.trendeo.com/user-restricted/wishlist/{market}`
 
 ## Clear a wishlist
 
@@ -75,7 +75,7 @@ Removes all products from the wishlist of a user.
 > To remove all items from a user wishlist, use this code:
 
 ```shell
-curl -X DELETE "https://api-dev.trendeo.com/wishlist" \
+curl -X DELETE "https://api-dev.trendeo.com/user-restricted/wishlist" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc..."
 ```
@@ -84,7 +84,7 @@ curl -X DELETE "https://api-dev.trendeo.com/wishlist" \
 
 ### HTTP Request
 
-`DELETE https://api-dev.trendeo.com/wishlist`
+`DELETE https://api-dev.trendeo.com/user-restricted/wishlist`
 
 ## Add items
 
@@ -94,7 +94,7 @@ This endpoint will return an error BAD GATEWAY in case the product could not be 
 > To add items to a user wishlist, use this code:
 
 ```shell
-curl -X POST "https://api-dev.trendeo.com/wishlist/add" \
+curl -X POST "https://api-dev.trendeo.com/user-restricted/wishlist/add" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc..." \
   --data-raw "{ \"market\": \"UK\", \"entries\": [ { \"productId\": \"a3f3de23-86ef-3b4f-a943-79ab594effc9\", \"productSku\": \"Sylvie_Black_ML\" } ] }"
@@ -104,7 +104,7 @@ curl -X POST "https://api-dev.trendeo.com/wishlist/add" \
 
 ### HTTP Request
 
-`POST https://api-dev.trendeo.com/wishlist/add`
+`POST https://api-dev.trendeo.com/user-restricted/wishlist/add`
 
 ## Remove items
 
@@ -115,7 +115,7 @@ No error will be thrown in case the user actually does not have the given produc
 > To remove items from a user wishlist, use this code:
 
 ```shell
-curl -X POST "https://api-dev.trendeo.com/wishlist/remove" \
+curl -X POST "https://api-dev.trendeo.com/user-restricted/wishlist/remove" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc..." \
   --data-raw "{ \"market\": \"UK\", \"entries\": [ { \"productId\": \"a3f3de23-86ef-3b4f-a943-79ab594effc9\", \"productSku\": \"Sylvie_Black_ML\" } ] }"
@@ -125,4 +125,4 @@ curl -X POST "https://api-dev.trendeo.com/wishlist/remove" \
 
 ### HTTP Request
 
-`POST https://api-dev.trendeo.com/wishlist/remove`
+`POST https://api-dev.trendeo.com/user-restricted/wishlist/remove`

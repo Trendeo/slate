@@ -178,7 +178,7 @@ username | Username of the logged-in user
 > To change the email address of a facebook user for whom we did not get the email address, use this code:
 
 ```shell
-curl -X POST "https://apigw-dev.trendeo.com/authentication/social/facebook/change-email" \
+curl -X POST "https://apigw-dev.trendeo.com/user-restricted/authentication/social/facebook/change-email" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc..." \
   --data-raw "{\"newEmail\":\"testuser@trendeo.com\"}"
@@ -188,7 +188,7 @@ curl -X POST "https://apigw-dev.trendeo.com/authentication/social/facebook/chang
 
 #### HTTP Request
 
-`POST https://apigw-dev.trendeo.com/authentication/social/facebook/change-email`
+`POST https://apigw-dev.trendeo.com/user-restricted/authentication/social/facebook/change-email`
 
 #### Query Parameters
 
@@ -355,7 +355,7 @@ This API endpoint response simply with a 200 status code without body.
 > To change the password of a user from personal area, use this code:
 
 ```shell
-curl -X POST "https://apigw-dev.trendeo.com/authentication/change-password-logged-in" \
+curl -X POST "https://apigw-dev.trendeo.com/user-restricted/authentication/change-password-logged-in" \
   -H "Authorization: Bearer abcd..." \
   -H "Content-type: application/json" \
   --data-raw "{\"currentPassword\":\"current\",\"newPassword\":\"new\"}"
@@ -366,7 +366,7 @@ This API endpoint response simply with a 200 status code without body.
 
 #### HTTP Request
 
-`POST https://apigw-dev.trendeo.com/authentication/change-password-logged-in`
+`POST https://apigw-dev.trendeo.com/user-restricted/authentication/change-password-logged-in`
 
 #### Query Parameters
 
@@ -434,7 +434,8 @@ username | Username of new user
 > To get the profile information of a user, use this code:
 
 ```shell
-curl -X GET "https://apigw-dev.trendeo.com/authentication/user" \
+curl -X GET "https://apigw-dev.trendeo.com/user-restricted/authentication/user" \
+  -H "Content-type: application/json" \
   -H "Authorization: Bearer abcd..."
 ```
 
@@ -453,7 +454,7 @@ curl -X GET "https://apigw-dev.trendeo.com/authentication/user" \
 
 ## HTTP Request
 
-`GET https://apigw-dev.trendeo.com/authentication/user`
+`GET https://apigw-dev.trendeo.com/user-restricted/authentication/user`
 
 ## Response
 
@@ -472,7 +473,7 @@ phone | Phone number
 > To update the details of a user, use this code:
 
 ```shell
-curl -X PATCH "https://apigw-dev.trendeo.com/authentication/user" \
+curl -X PATCH "https://apigw-dev.trendeo.com/user-restricted/authentication/user" \
   -H "Authorization: Bearer abcd..." \
   -H "Content-type: application/json" \
   --data-raw "{\"firstName\":\"API\",\"lastName\":\"LOVER\",\"gender\":\"MALE\",\"birthday\":\"2000-01-01\",\"phone\":\"+7123123123\"}"
@@ -493,7 +494,7 @@ curl -X PATCH "https://apigw-dev.trendeo.com/authentication/user" \
 
 ## HTTP Request
 
-`PATCH https://apigw-dev.trendeo.com/authentication/user`
+`PATCH https://apigw-dev.trendeo.com/user-restricted/authentication/user`
 
 ## Query Parameters
 

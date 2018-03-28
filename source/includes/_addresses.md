@@ -7,7 +7,7 @@ Users can have as many addresses as they like. Every address receives an alphanu
 > To create an address, use this code:
 
 ```shell
-curl -X POST "https://apigw-dev.trendeo.com/user/address" \
+curl -X POST "https://apigw-dev.trendeo.com/user-restricted/user/address" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc" \
   --data-raw "{
@@ -55,7 +55,7 @@ curl -X POST "https://apigw-dev.trendeo.com/user/address" \
 
 ### HTTP Request
 
-`POST https://apigw-dev.trendeo.com/user/address`
+`POST https://apigw-dev.trendeo.com/user-restricted/user/address`
 
 ### Query Parameters
 
@@ -107,7 +107,7 @@ primaryBilling | Is this the primary billing address of the user?
 > To update an address, use this code:
 
 ```shell
-curl -X PATCH "https://apigw-dev.trendeo.com/user/address/{add_address_id_here}" \
+curl -X PATCH "https://apigw-dev.trendeo.com/user-restricted/user/address/{add_address_id_here}" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc" \
   --data-raw "{
@@ -155,7 +155,7 @@ curl -X PATCH "https://apigw-dev.trendeo.com/user/address/{add_address_id_here}"
 
 ### HTTP Request
 
-`PATCH https://apigw-dev.trendeo.com/user/address/{add_address_id_here}`
+`PATCH https://apigw-dev.trendeo.com/user-restricted/user/address/{add_address_id_here}`
 
 ### Query Parameters
 
@@ -207,7 +207,7 @@ primaryBilling | Is this the primary billing address of the user?
 > To delete an address, use this code:
 
 ```shell
-curl -X DELETE "https://apigw-dev.trendeo.com/user/address/{add_address_id_here}" \
+curl -X DELETE "https://apigw-dev.trendeo.com/user-restricted/user/address/{add_address_id_here}" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc"
 ```
@@ -216,7 +216,7 @@ curl -X DELETE "https://apigw-dev.trendeo.com/user/address/{add_address_id_here}
 
 ### HTTP Request
 
-`DELETE https://apigw-dev.trendeo.com/user/address/{add_address_id_here}`
+`DELETE https://apigw-dev.trendeo.com/user-restricted/user/address/{add_address_id_here}`
 
 ### Query Parameters
 
@@ -233,7 +233,7 @@ In case there is no address with the given address ID, a 404 error is returned.
 > To get one specific address, execute the following:
 
 ```shell
-curl -X GET "https://apigw-dev.trendeo.com/user/address/{add_address_id_here}" \
+curl -X GET "https://apigw-dev.trendeo.com/user-restricted/user/address/{add_address_id_here}" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc"
 ```
@@ -265,7 +265,7 @@ curl -X GET "https://apigw-dev.trendeo.com/user/address/{add_address_id_here}" \
 
 ### HTTP Request
 
-`GET https://apigw-dev.trendeo.com/user/address/{add_address_id_here}`
+`GET https://apigw-dev.trendeo.com/user-restricted/user/address/{add_address_id_here}`
 
 ### Query Parameters
 
@@ -301,7 +301,7 @@ primaryBilling | Is this the primary billing address of the user?
 > To get all addresses of a user, execute the following:
 
 ```shell
-curl -X GET "https://apigw-dev.trendeo.com/user/address" \
+curl -X GET "https://apigw-dev.trendeo.com/user-restricted/user/address" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc"
 ```
@@ -355,7 +355,7 @@ curl -X GET "https://apigw-dev.trendeo.com/user/address" \
 
 ### HTTP Request
 
-`GET https://apigw-dev.trendeo.com/user/address`
+`GET https://apigw-dev.trendeo.com/user-restricted/user/address`
 
 ### Query Parameters
 
