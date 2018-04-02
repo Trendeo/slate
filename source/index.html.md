@@ -12,6 +12,7 @@ includes:
   - reviews
   - priceactions
   - wishlist
+  - creditcards
   - errors
 
 search: true
