@@ -10,6 +10,7 @@
     "merchantId": "diva-dames",
     "actionStart": "2018-01-15",
     "actionEnd": "2018-03-20",
+    "addedStartDate": "2018-01-01",
     "blackPricesOnly": true,
     "title": "Test",
     "discountPercentage": 20,
@@ -19,6 +20,12 @@
     "processedResult": null,
     "processedError": null,
     "filteredCategories": {
+        "categories": [
+            "test",
+            "test2"
+        ]
+    },
+    "excludedCategories": {
         "categories": [
             "test",
             "test2"
@@ -36,6 +43,7 @@
     "merchantId": "glamzam",
     "actionStart": "2018-01-15",
     "actionEnd": "2018-03-20",
+    "addedStartDate": "2018-01-01",
     "blackPricesOnly": true,
     "title": "A price action",
     "filteredCategories": {
@@ -43,6 +51,12 @@
             "test",
 			      "test2"
 		    ]
+    },
+    "excludedCategories": {
+        "categories": [
+            "test",
+            "test2"
+        ]
     }
 }
 ```
@@ -59,9 +73,11 @@ discountPercentage | yes | Numerical value for the percentage discount to apply.
 merchantId | yes | Merchant ID of the merchant owning the price action.
 actionStart | yes | Start date in format yyyy-mm-dd.
 actionEnd | yes | End date in format yyyy-mm-dd. Needs to be after start date
+addedStartDate | no | This allows to restrict the products to which the particular price action is applied to products which were created (i.e. field "added") later than that given date. IMPORTANT: In case this date is not given, "1970-01-01" is returned (i.e. 0 ms since unix epoch), so you should show it somewhat differently to not confuse users.
 blackPricesOnly | no | Whether the action should be only applied to non-discounted products, or to any. Default is false (i.e. applies to any product)
 title | no | Title of the price action; not more than 255 characters.
 filteredCategories | no | Object containing the field "categories", which just contains a string-array of all category IDs ("Women|Clothing|Dresses|...") to which the price action should be limited.
+excludedCategories | no | Object containing the field "categories", which just contains a string-array of all category IDs ("Women|Clothing|Dresses|...") which should be excluded from this price action. It's basically the negation of "filteredCategories"
 
 The responses from backend (from here on called "price action object") contain the following beyond the above-mentioned ones:
 
