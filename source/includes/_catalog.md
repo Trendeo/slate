@@ -19,7 +19,39 @@
     "originalPrice": 55,
     "discountPct": 0,
     "title": "Nola Black Backless Maxi Grecian Dress",
-    "merchantId": "nazz-collection"
+    "merchantId": "nazz-collection",
+    "variations": [
+      {
+          "sku": "FRANKIE-BlackSuede-3",
+          "size": "3",
+          "sizeSelect": "UK 3",
+          "stock": 3
+      },
+      {
+          "sku": "FRANKIE-BlackSuede-4",
+          "size": "4",
+          "sizeSelect": "UK 4",
+          "stock": 0
+      },
+      {
+          "sku": "FRANKIE-BlackSuede-5",
+          "size": "5",
+          "sizeSelect": "UK 5",
+          "stock": 0
+      },
+      {
+          "sku": "FRANKIE-BlackSuede-6",
+          "size": "6",
+          "sizeSelect": "UK 6",
+          "stock": 0
+      },
+      {
+          "sku": "FRANKIE-BlackSuede-7",
+          "size": "7",
+          "sizeSelect": "UK 7",
+          "stock": 0
+      }
+  ]
 }
 ```
 
@@ -131,6 +163,7 @@ originalPrice | Price before discount. Should be always >= price. Float
 discountPct | Percentage of discount (i.e. (price / originalPrice - 1) * 100). Float
 title | Title of the product
 merchantId | Merchant for that product
+variations | List of all sizes with their sizes, stock and merchant SKU
 
 The full product object contains the following fields:
 
@@ -186,7 +219,39 @@ curl -X POST "https://apigw-dev.trendeo.com/catalog/search" \
             "originalPrice": 35,
             "discountPct": 0,
             "title": "Karla Black Plunge Scalloped Lace Embroidery Midi Dress",
-            "merchantId": "nazz-collection"
+            "merchantId": "nazz-collection",
+            "variations": [
+                {
+                    "sku": "FRANKIE-BlackSuede-3",
+                    "size": "3",
+                    "sizeSelect": "UK 3",
+                    "stock": 3
+                },
+                {
+                    "sku": "FRANKIE-BlackSuede-4",
+                    "size": "4",
+                    "sizeSelect": "UK 4",
+                    "stock": 0
+                },
+                {
+                    "sku": "FRANKIE-BlackSuede-5",
+                    "size": "5",
+                    "sizeSelect": "UK 5",
+                    "stock": 0
+                },
+                {
+                    "sku": "FRANKIE-BlackSuede-6",
+                    "size": "6",
+                    "sizeSelect": "UK 6",
+                    "stock": 0
+                },
+                {
+                    "sku": "FRANKIE-BlackSuede-7",
+                    "size": "7",
+                    "sizeSelect": "UK 7",
+                    "stock": 0
+                }
+            ]
         }
     ],
     "aggregations": {
@@ -279,7 +344,33 @@ curl -X POST "https://apigw-dev.trendeo.com/catalog/recommendations/product-to-p
         "originalPrice": 11.95,
         "discountPct": 0,
         "title": "Celebrity Turtle Neck Long Sleeve Ribbed Bodycon Dress",
-        "merchantId": "itsin-fashion"
+        "merchantId": "itsin-fashion",
+        "variations": [
+            {
+                "sku": "70918-91541-91542",
+                "size": "XS",
+                "sizeSelect": "UK 6",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91543",
+                "size": "S",
+                "sizeSelect": "UK 8",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91545",
+                "size": "M",
+                "sizeSelect": "UK 12",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91546",
+                "size": "S",
+                "sizeSelect": "UK 10",
+                "stock": 3
+            }
+        ]
     },
     {
         "id": "uk_08f5d102-088d-41ab-9d78-7c4711e00d1c_black",
@@ -292,7 +383,33 @@ curl -X POST "https://apigw-dev.trendeo.com/catalog/recommendations/product-to-p
         "originalPrice": 11.95,
         "discountPct": 0,
         "title": "Celebrity Turtle Neck Long Sleeve Ribbed Bodycon Dress",
-        "merchantId": "itsin-fashion"
+        "merchantId": "itsin-fashion",
+        "variations": [
+            {
+                "sku": "70918-91541-91542",
+                "size": "XS",
+                "sizeSelect": "UK 6",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91543",
+                "size": "S",
+                "sizeSelect": "UK 8",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91545",
+                "size": "M",
+                "sizeSelect": "UK 12",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91546",
+                "size": "S",
+                "sizeSelect": "UK 10",
+                "stock": 3
+            }
+        ]
     }
 ]
 ```
