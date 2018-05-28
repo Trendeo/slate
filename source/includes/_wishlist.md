@@ -68,6 +68,26 @@ curl -X GET "https://api-dev.trendeo.com/user-restricted/wishlist/{market}?page=
 
 `GET https://api-dev.trendeo.com/user-restricted/wishlist/{market}`
 
+## Get only product IDs in wishlist
+
+The endpoint returns just a JSON array of product IDs (without market) which the logged-in user has in her/his wishlist.
+It was created to save bandwidth during catalog rendering, which needs to show which products are in the wishlist and which not.
+The IDs have the structure {product-id}_{color-slug}, i.e. the regular long product ID format just without the market.
+
+> To get the product IDs in the wishlist of a user, use this code:
+
+```shell
+curl -X GET "https://api-dev.trendeo.com/user-restricted/wishlist/{market}/product-ids-only" \
+  -H "Content-type: application/json" \
+  -H "Authorization: Bearer abc..."
+```
+
+> The above command returns an array of product-id-strings in format {product-id}_{color-slug}.
+
+### HTTP Request
+
+`GET https://api-dev.trendeo.com/user-restricted/wishlist/{market}/product-ids-only`
+
 ## Clear a wishlist
 
 Removes all products from the wishlist of a user.
