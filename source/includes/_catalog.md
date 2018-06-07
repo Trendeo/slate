@@ -302,6 +302,7 @@ maxDiscount | no | The maximum discount in % that the returned products have
 publicOnly | no | "true" or "false"; determines whether you will get only products with status "PUBLIC", or all. The API returns also non-PUBLIC products by default
 aggregationsIncluded | no | Do you want the aggregations for filters to be included or not (true or false). Not included by default
 sortField | no | Field to sort by. Can be one of "POPULARITY", "CREATED" or "PRICE". Default is "POPULARITY"
+sortingId | no | Field to specify the sorting ID that should be used. Only relevant for when sortField = POPULARITY. Requires an integer between 1 and 9. Default is 1 in case this parameter is not provided.
 sortDirection | no | Either "DESC" or "ASC". "DESC" by default
 filteredMerchants | no | String-array of merchant IDs to filter. Case-insensitive.
 filteredColors | no | String-array of colors to filter. Case-insensitive.
