@@ -31,7 +31,8 @@
             "test2"
         ]
     },
-    "active": false
+    "active": false,
+    "minimumPrice": 0
 }
 ```
 
@@ -45,6 +46,7 @@
     "actionEnd": "2018-03-20",
     "addedStartDate": "2018-01-01",
     "blackPricesOnly": true,
+    "minimumPrice": 0.0,
     "title": "A price action",
     "filteredCategories": {
 		    "categories": [
@@ -75,6 +77,7 @@ actionStart | yes | Start date in format yyyy-mm-dd.
 actionEnd | yes | End date in format yyyy-mm-dd. Needs to be after start date
 addedStartDate | no | This allows to restrict the products to which the particular price action is applied to products which were created (i.e. field "added") later than that given date. IMPORTANT: In case this date is not given, "1970-01-01" is returned (i.e. 0 ms since unix epoch), so you should show it somewhat differently to not confuse users.
 blackPricesOnly | no | Whether the action should be only applied to non-discounted products, or to any. Default is false (i.e. applies to any product)
+minimumPrice | no | The minimum price for products that should be included in the price action. The price that is taken from the product is always the UK GBP price after onsite discounts. If you leave this field empty, the field will be set to 0.0, which means that no filter will be applied
 title | no | Title of the price action; not more than 255 characters.
 filteredCategories | no | Object containing the field "categories", which just contains a string-array of all category IDs ("Women|Clothing|Dresses|...") to which the price action should be limited.
 excludedCategories | no | Object containing the field "categories", which just contains a string-array of all category IDs ("Women|Clothing|Dresses|...") which should be excluded from this price action. It's basically the negation of "filteredCategories"
@@ -176,7 +179,7 @@ For a logged-in merchant, the parameter in the body is basically ignored, but sh
 curl -X POST "https://api-dev.trendeo.com/price-actions" \
   -H "Content-type: application/json" \
   -H "Authorization: Bearer abc..." \
-  --data-raw "{ \"discountPercentage\": 30, \"merchantId\": \"glamzam\", \"actionStart\": \"2018-01-15\", \"actionEnd\": \"2018-03-20\", \"blackPricesOnly\": true, \"filteredCategories\": { \"categories\": [ \"test\", \"test2\" ] } }"
+  --data-raw "{ \"discountPercentage\": 30, \"merchantId\": \"glamzam\", \"actionStart\": \"2018-01-15\", \"actionEnd\": \"2018-03-20\", \"blackPricesOnly\": true, \"filteredCategories\": { \"categories\": [ \"test\", \"test2\" ] }, \"minimumPrice\": 14.99 }"
 ```
 
 > The above command returns the created price action object, as defined above.
@@ -188,6 +191,7 @@ curl -X POST "https://api-dev.trendeo.com/price-actions" \
 ## Update a price action
 
 Updates the price action with the given ID.
+Important: If you do not provide the minimumPrice field, mit will be set to 0.0!
 
 > To update an action, use this code:
 
