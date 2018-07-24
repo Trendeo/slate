@@ -437,6 +437,247 @@ crossSell | no | Boolean value (true or false). Default is true. This value mean
 The API responds with a JSON array of reduced product objects that are more or less similar to the given product. Important: The number of results might be lower than given in the "size" parameter, in case Elastic just couldn't find so many products as you wanted.
 
 
+## Get product-to-product recommendations - V2!
+
+We have integrated with the external recommendation solution Recombee, which gets all catalog changes, product pageviews cart additions and purchases in real-time, and then creates items-to-user and items-to-item recommendations. This v2-API allows to get recommendations for a specific product.
+
+> Following request is an example for a Recombee product-to-product recommendation query:
+
+```shell
+curl -X POST "https://apigw-dev.trendeo.com/catalog/recommendations/product-to-product-v2" \
+  -H "Content-type: application/json" \
+  --data-raw "{ \"market\": \"uk\", \"size\": 20, \"username\": \"dominik.pickerh@gmail.com\", \"productId\": \"uk_f60c3cd4-2cf3-3836-be13-346e1fb5b679_bronze\", \"diversity\": 0.5, \"rotationRate\": 0.5, \"rotationTime\": 3200, \"filteredMerchants\": [ \"isawitfirst\", \"lotd\"], \"filteredCategories\": [ \"Women|Clothing|Dresses\", \"Women|Shoes|Sandals\"] }"
+```
+
+> The above command returns an array of reduced product objects like this:
+
+```json
+[
+    {
+        "id": "uk_08f5d102-088d-41ab-9d78-7c4711e00d1c_olive",
+        "slug": "uk_08f5d102-088d-41ab-9d78-7c4711e00d1c_olive",
+        "images": [
+            "itsin-fashion/41aefbmtdvl.jpg"
+        ],
+        "mainImage": "itsin-fashion/41aefbmtdvl.jpg",
+        "price": 11.95,
+        "originalPrice": 11.95,
+        "discountPct": 0,
+        "title": "Celebrity Turtle Neck Long Sleeve Ribbed Bodycon Dress",
+        "merchantId": "itsin-fashion",
+        "variations": [
+            {
+                "sku": "70918-91541-91542",
+                "size": "XS",
+                "sizeSelect": "UK 6",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91543",
+                "size": "S",
+                "sizeSelect": "UK 8",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91545",
+                "size": "M",
+                "sizeSelect": "UK 12",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91546",
+                "size": "S",
+                "sizeSelect": "UK 10",
+                "stock": 3
+            }
+        ]
+    },
+    {
+        "id": "uk_08f5d102-088d-41ab-9d78-7c4711e00d1c_black",
+        "slug": "uk_08f5d102-088d-41ab-9d78-7c4711e00d1c_black",
+        "images": [
+            "itsin-fashion/41renc0a1vl.jpg"
+        ],
+        "mainImage": "itsin-fashion/41renc0a1vl.jpg",
+        "price": 11.95,
+        "originalPrice": 11.95,
+        "discountPct": 0,
+        "title": "Celebrity Turtle Neck Long Sleeve Ribbed Bodycon Dress",
+        "merchantId": "itsin-fashion",
+        "variations": [
+            {
+                "sku": "70918-91541-91542",
+                "size": "XS",
+                "sizeSelect": "UK 6",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91543",
+                "size": "S",
+                "sizeSelect": "UK 8",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91545",
+                "size": "M",
+                "sizeSelect": "UK 12",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91546",
+                "size": "S",
+                "sizeSelect": "UK 10",
+                "stock": 3
+            }
+        ]
+    }
+]
+```
+
+### HTTP Request
+
+`POST https://apigw-dev.trendeo.com/catalog/recommendations/product-to-product-v2`
+
+### Query Parameters
+
+The request should be done with POST method and can contain the following fields as JSON body:
+
+Parameter | Required? | Description
+--------- | ------- | -----------
+market | yes | Market catalog to search in
+username | yes | Username for whom recommendations should be found
+productId | yes | Full id of the product (i.e. full slug incl. market, product ID and color) for which recommendations should be found.
+size | no | Number of recommendations to return. 12 by default. Important: It might happen that the API returns less than those, in case e.g. when product status is out of sync between Recombee and us. To be safe, please request a few more in case you really need an exact amount of recommendations
+filteredMerchants | no | String-array of merchant IDs to filter. Case-insensitive.
+filteredCategories | no | String-array of categories in the usual "Women|Clothing|Dresses|..." format to filter. Case-insensitive.
+diversity | no | Value between 0.0 and 1.0 to specify how different the products within the recommendations should be. 0.0 means not different, 1.0 means very different. Default is 0.0
+rotationRate | no | Value between 0.0 and 1.0 to specify how different the products in multiple recommendation request should be. 0.0 means not different, 1.0 means very different. This basically influences whether a user will see a recommended product later again, or not.
+rotationTime | no | Absolute value in seconds to determine how long a recommended product should not be shown to the user again. Default is 7200 (i.e. 2 hours).
+
+### Response
+The API responds with a JSON array of reduced product objects.
+
+
+## Get product-to-user recommendations
+
+This API allows to get recommendations for a specific user, regardless what specifically (s)he is currently looking at.
+
+> Following request is an example for a Recombee product-to-user recommendation query:
+
+```shell
+curl -X POST "https://apigw-dev.trendeo.com/catalog/recommendations/product-to-user" \
+  -H "Content-type: application/json" \
+  --data-raw "{ \"market\": \"uk\", \"size\": 20, \"username\": \"dominik.pickerh@gmail.com\", \"diversity\": 0.5, \"rotationRate\": 0.5, \"rotationTime\": 3200, \"filteredMerchants\": [ \"isawitfirst\", \"lotd\"], \"filteredCategories\": [ \"Women|Clothing|Dresses\", \"Women|Shoes|Sandals\"] }"
+```
+
+> The above command returns an array of reduced product objects like this:
+
+```json
+[
+    {
+        "id": "uk_08f5d102-088d-41ab-9d78-7c4711e00d1c_olive",
+        "slug": "uk_08f5d102-088d-41ab-9d78-7c4711e00d1c_olive",
+        "images": [
+            "itsin-fashion/41aefbmtdvl.jpg"
+        ],
+        "mainImage": "itsin-fashion/41aefbmtdvl.jpg",
+        "price": 11.95,
+        "originalPrice": 11.95,
+        "discountPct": 0,
+        "title": "Celebrity Turtle Neck Long Sleeve Ribbed Bodycon Dress",
+        "merchantId": "itsin-fashion",
+        "variations": [
+            {
+                "sku": "70918-91541-91542",
+                "size": "XS",
+                "sizeSelect": "UK 6",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91543",
+                "size": "S",
+                "sizeSelect": "UK 8",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91545",
+                "size": "M",
+                "sizeSelect": "UK 12",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91546",
+                "size": "S",
+                "sizeSelect": "UK 10",
+                "stock": 3
+            }
+        ]
+    },
+    {
+        "id": "uk_08f5d102-088d-41ab-9d78-7c4711e00d1c_black",
+        "slug": "uk_08f5d102-088d-41ab-9d78-7c4711e00d1c_black",
+        "images": [
+            "itsin-fashion/41renc0a1vl.jpg"
+        ],
+        "mainImage": "itsin-fashion/41renc0a1vl.jpg",
+        "price": 11.95,
+        "originalPrice": 11.95,
+        "discountPct": 0,
+        "title": "Celebrity Turtle Neck Long Sleeve Ribbed Bodycon Dress",
+        "merchantId": "itsin-fashion",
+        "variations": [
+            {
+                "sku": "70918-91541-91542",
+                "size": "XS",
+                "sizeSelect": "UK 6",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91543",
+                "size": "S",
+                "sizeSelect": "UK 8",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91545",
+                "size": "M",
+                "sizeSelect": "UK 12",
+                "stock": 3
+            },
+            {
+                "sku": "70918-91541-91546",
+                "size": "S",
+                "sizeSelect": "UK 10",
+                "stock": 3
+            }
+        ]
+    }
+]
+```
+
+### HTTP Request
+
+`POST https://apigw-dev.trendeo.com/catalog/recommendations/product-to-user`
+
+### Query Parameters
+
+The request should be done with POST method and can contain the following fields as JSON body:
+
+Parameter | Required? | Description
+--------- | ------- | -----------
+market | yes | Market catalog to search in
+username | yes | Username for whom recommendations should be found
+size | no | Number of recommendations to return. 12 by default. Important: It might happen that the API returns less than those, in case e.g. when product status is out of sync between Recombee and us. To be safe, please request a few more in case you really need an exact amount of recommendations
+filteredMerchants | no | String-array of merchant IDs to filter. Case-insensitive.
+filteredCategories | no | String-array of categories in the usual "Women|Clothing|Dresses|..." format to filter. Case-insensitive.
+diversity | no | Value between 0.0 and 1.0 to specify how different the products within the recommendations should be. 0.0 means not different, 1.0 means very different. Default is 0.0
+rotationRate | no | Value between 0.0 and 1.0 to specify how different the products in multiple recommendation request should be. 0.0 means not different, 1.0 means very different. This basically influences whether a user will see a recommended product later again, or not.
+rotationTime | no | Absolute value in seconds to determine how long a recommended product should not be shown to the user again. Default is 7200 (i.e. 2 hours).
+
+### Response
+The API responds with a JSON array of reduced product objects.
+
+
 ## Get a paticular product
 
 Allows to get full elastic information about one specific product.
